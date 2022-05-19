@@ -1,5 +1,4 @@
-﻿using DummyApiExample.Api.Options;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace DummyApiExample.Api.Controllers;
 
@@ -7,22 +6,30 @@ namespace DummyApiExample.Api.Controllers;
 [Route("api/[controller]")]
 public class DummyController : ControllerBase
 {
-    private readonly ILogger<DummyController> _logger;
     private readonly IDummyApiServiceHelper _dummyApiServiceHelper;
 
     public DummyController(ILogger<DummyController> logger, IDummyApiServiceHelper dummyApiServiceHelper)
     {
-        _logger = logger;
         _dummyApiServiceHelper = dummyApiServiceHelper;
     }
 
-    [HttpGet]
-    public async Task<ActionResult> GetAll(CancellationToken cancellationToken)
+    [HttpGet("user")]
+    public async Task<ActionResult> GetAll([FromQuery]int limit, [FromQuery]int page, CancellationToken cancellationToken)
     {
-        var result = await _dummyApiServiceHelper.GetUsersAsync(cancellationToken);
+        var result = await _dummyApiServiceHelper.GetUsersAsync(limit, page, cancellationToken);
         if (result is not null)
             return Ok(result);
 
+        return NotFound();
+    }
+    
+    [HttpGet("user/{id}")]
+    public async Task<ActionResult> GetById(string id, CancellationToken cancellationToken)
+    {
+        var result = await _dummyApiServiceHelper.GetByIdAsync(id, cancellationToken);
+        if (result is not null)
+            return Ok(result);
+        
         return NotFound();
     }
 }
