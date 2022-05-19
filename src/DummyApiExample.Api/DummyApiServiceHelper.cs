@@ -7,7 +7,7 @@ namespace DummyApiExample.Api;
 
 public interface IDummyApiServiceHelper
 {
-    public Task<BaseResponse<UserResponse>?> GetUsersAsync(int limit, int page, CancellationToken cancellationToken = default);
+    public Task<BasePaginationResponse<UserResponse>?> GetUsersAsync(int limit, int page, CancellationToken cancellationToken = default);
     public Task<UserDetailsResponse?> GetByIdAsync(string userId, CancellationToken cancellationToken = default);
 
 }
@@ -23,11 +23,11 @@ public class DummyApiServiceHelper : IDummyApiServiceHelper
         _httpClient = httpClientFactory.CreateClient("dummy");
     }
     
-    public async Task<BaseResponse<UserResponse>?> GetUsersAsync(int limit, int page, CancellationToken cancellationToken = default)
+    public async Task<BasePaginationResponse<UserResponse>?> GetUsersAsync(int limit, int page, CancellationToken cancellationToken = default)
     {
         try
         {
-            var response = await _httpClient.GetAsObjectAsync<BaseResponse<UserResponse>>(UserEndpoints.GetAll(limit, page), cancellationToken);
+            var response = await _httpClient.GetAsObjectAsync<BasePaginationResponse<UserResponse>>(UserEndpoints.GetAll(limit, page), cancellationToken);
             return response;
         }
         catch (Exception e)

@@ -1,6 +1,6 @@
 ﻿namespace DummyApiExample.Api.Response;
 
-public sealed record BaseResponse<T>(
+public sealed record BasePaginationResponse<T>(
     IReadOnlyList<T> Data,
     int Total,
     int Page,
