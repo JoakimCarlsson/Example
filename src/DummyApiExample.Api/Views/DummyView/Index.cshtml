@@ -1,0 +1,61 @@
+﻿@model DummyApiExample.Api.Response.BasePaginationResponse<DummyApiExample.Api.Response.UserResponse>?
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>HTML Table</h2>
+
+    @if (Model is null)
+    {
+        <h1>None Found</h1>
+    }
+    else
+    {
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Title</th>
+                <th>Pictgure</th>
+            </tr>
+            @foreach (var user in Model.Data)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Title</td>
+                    <td><img src="@user.Picture" alt="picture"/></td>
+                </tr>
+            }
+
+   
+        </table>
+    }
+</body>
+</html>
