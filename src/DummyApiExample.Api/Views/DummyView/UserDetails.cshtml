@@ -1,0 +1,41 @@
+﻿@model DummyApiExample.Api.Response.UserDetailsResponse?
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+    @if (Model is null)
+    {
+        <h1>Not Found</h1>
+    }
+    else
+    {
+        <h2>User Details</h2>
+        <img src="@Model.Picture" alt="@Model.Title"/>
+        <p>First Name: @Model.FirstName</p>
+        <p>Last Name: @Model.LastName</p>
+        <p>Gender: @Model.Gender</p>
+        <p>Phone: @Model.Phone</p>
+        <p>Title: @Model.Title</p>
+        <p>Register Date: @Model.RegisterDate</p>                      
+        <p>Updated Date: @Model.UpdatedDate</p>                      
+        <p>Date Of Birth: @Model.DateOfBirth</p>                      
+                                             
+        <h2>Location</h2>
+        <p>City: @Model.Location.City</p>
+        <p>Country: @Model.Location.Country</p>
+        <p>State: @Model.Location.State</p>
+        <p>Street: @Model.Location.Street</p>
+        <p>Timezone: @Model.Location.Timezone</p>
+    }
+</div>
+</body>
+</html>

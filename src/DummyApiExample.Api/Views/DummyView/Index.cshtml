@@ -42,6 +42,7 @@ tr:nth-child(even) {
                 <th>Last Name</th>
                 <th>Title</th>
                 <th>Pictgure</th>
+                <th></th>
             </tr>
             @foreach (var user in Model.Data)
             {
@@ -51,8 +52,10 @@ tr:nth-child(even) {
                     <td>@user.LastName</td>
                     <td>@user.Title</td>
                     <td><img src="@user.Picture" alt="picture"/></td>
+                    <td><a asp-action="UserDetails" asp-controller="DummyView" asp-route-id="@user.Id" >Book Inventory Page</a></td>
                 </tr>
             }
+
 
    
         </table>

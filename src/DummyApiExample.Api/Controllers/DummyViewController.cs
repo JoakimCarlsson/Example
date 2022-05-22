@@ -11,10 +11,18 @@ public class DummyViewController : Controller
         _dummyApiServiceHelper = dummyApiServiceHelper;
     }
     
+    [HttpGet]
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var result = await _dummyApiServiceHelper.GetUsersAsync(30, 0, cancellationToken);
         
+        return View(result);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> UserDetails(string id, CancellationToken cancellationToken)
+    {
+        var result = await _dummyApiServiceHelper.GetByIdAsync(id, cancellationToken);
         return View(result);
     }
 }
